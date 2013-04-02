@@ -76,14 +76,15 @@ public class RendererGL10 implements Renderer {
 	private void renderReimu (GL10 gl, Reimu reimu) {
 		if (reimu.isExploding) return;
 		spriteBatch.begin();
-		gl.glPushMatrix();
-		gl.glTranslatef(reimu.position.x, reimu.position.y, reimu.position.z);
-		gl.glRotatef(45 * (-Gdx.input.getAccelerometerY() / 5), 0, 0, 1);
-		gl.glRotatef(180, 0, 1, 0);
+		spriteBatch.disableBlending();
+//		gl.glPushMatrix();
+//		gl.glTranslatef(reimu.position.x, reimu.position.y, reimu.position.z);
+//		gl.glRotatef(45 * (-Gdx.input.getAccelerometerY() / 5), 0, 0, 1);
+//		gl.glRotatef(180, 0, 1, 0);
 		spriteBatch.draw(reimuTexture,reimu.position.x,reimu.position.y);
-		gl.glPopMatrix();
-		
 		spriteBatch.end();
+//		gl.glPopMatrix();
+		
 	}
 	
 	private void renderBoss (GL10 gl, Boss boss) {
