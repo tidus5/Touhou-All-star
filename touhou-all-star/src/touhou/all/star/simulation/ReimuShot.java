@@ -1,27 +1,22 @@
 package touhou.all.star.simulation;
 
-import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.Vector2;
 
 public class ReimuShot {
 	
 	public static float SHOT_VELOCITY = 10;
-	public final Vector3 position = new Vector3();
-	public boolean isInvaderShot;
+	public final Vector2 position = new Vector2();
 	public boolean hasLeftField = false;
 	
-	public ReimuShot (Vector3 position, boolean isInvaderShot) {
+	public ReimuShot (Vector2 position) {
 		this.position.set(position);
-		this.isInvaderShot = isInvaderShot;
 	}
 	
 	public void update (float delta) {
-		if (isInvaderShot)
-			position.z += SHOT_VELOCITY * delta;
-		else
-			position.z -= SHOT_VELOCITY * delta;
+			position.y += (20+SHOT_VELOCITY * delta);
 
-		if (position.z > Simulation.PLAYFIELD_MAX_Z) hasLeftField = true;
-		if (position.z < Simulation.PLAYFIELD_MIN_Z) hasLeftField = true;
+		if (position.y > Simulation.PLAYFIELD_MAX_Y ||
+		position.y < Simulation.PLAYFIELD_MIN_Y) hasLeftField = true;
 	}
 
 }

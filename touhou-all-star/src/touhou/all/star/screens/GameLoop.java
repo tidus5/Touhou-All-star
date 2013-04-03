@@ -58,6 +58,11 @@ public class GameLoop extends GameScreen implements SimulationListener {
 		if (Gdx.input.isKeyPressed(Keys.DPAD_RIGHT)|| Gdx.input.isKeyPressed(Keys.D))simulation.moveReimuRight(delta, 3.5f);
 		if (Gdx.input.isKeyPressed(Keys.DPAD_UP)|| Gdx.input.isKeyPressed(Keys.W))simulation.moveReimuUp(delta, 3.5f);
 		if (Gdx.input.isKeyPressed(Keys.DPAD_DOWN)|| Gdx.input.isKeyPressed(Keys.S))simulation.moveReimuDown(delta, 3.5f);
+		if (Gdx.input.isKeyPressed(Keys.SHIFT_LEFT)) {
+			simulation.setReimuSlowSpeed();
+		} else {
+			simulation.setReimuNormalSpeed();
+		}
 		if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(Keys.Z))simulation.shot();
 
 	}
