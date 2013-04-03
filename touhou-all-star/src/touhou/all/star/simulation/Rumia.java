@@ -1,12 +1,12 @@
 package touhou.all.star.simulation;
 
-import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.Vector2;
 
 public class Rumia extends Boss{
 	
-	public final Vector3 position = new Vector3();
+	public final Vector2 position = new Vector2();
 	
-	public Rumia (Vector3 position) {
+	public Rumia (Vector2 position) {
 		this.position.set(position);
 	}
 

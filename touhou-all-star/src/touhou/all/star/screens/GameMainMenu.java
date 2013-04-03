@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.Matrix4;
 public class GameMainMenu extends GameScreen {
 	private final SpriteBatch spriteBatch;
 	private final Texture background;
+	private final Texture reimu;
 	private boolean isDone = false;
 	private final Matrix4 viewMatrix = new Matrix4();
 	private final Matrix4 transformMatrix = new Matrix4();
@@ -26,9 +27,9 @@ public class GameMainMenu extends GameScreen {
 	BitmapFont title;
 
 	public GameMainMenu() {
-		System.out.println(Gdx.graphics.isGL20Available());
 		spriteBatch = new SpriteBatch();
 		background = new Texture(Gdx.files.internal("MainMenuBackground.jpg"));
+		reimu= new Texture(Gdx.files.internal("reimu.png"));
 		background.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		generator = new FreeTypeFontGenerator(Gdx.files.internal("font1.ttf"));
@@ -53,6 +54,7 @@ public class GameMainMenu extends GameScreen {
 	
 	@Override
 	public void draw(float delta) {
+		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
 		
 //		viewMatrix.setToOrtho2D(0, 0, 480, 320);
@@ -60,9 +62,9 @@ public class GameMainMenu extends GameScreen {
 //		spriteBatch.setTransformMatrix(transformMatrix);
 		
 		spriteBatch.begin();
-		spriteBatch.disableBlending();
 		spriteBatch.setColor(Color.WHITE);
 		spriteBatch.draw(background, 0, 0, 1024, 768, 0, 0, 1024, 723, false, false);
+//		spriteBatch.draw(reimu, 0, 0, 128, 128, 0, 0, 128, 128, false, false);
 		spriteBatch.enableBlending();
 		title.draw(spriteBatch, FONT_CHARACTERS, 350, 760);
 		spriteBatch.end();
