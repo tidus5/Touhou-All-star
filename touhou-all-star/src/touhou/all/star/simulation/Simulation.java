@@ -43,22 +43,24 @@ public class Simulation {
 	
 	public void update (float delta) {
 		updateBoss(delta);
+//		updateYoukai(delta);
 		updateReimuShots(delta);
 		updateEnemyShots(delta);
+		updateCollision(delta);
 	}
 	
 	public void updateBoss(float delta){
-		timerRumia2+=delta;
-		if(timerRumia2>0.5){
-			enemyShot1();
-			timerRumia2=0;
+		timerRumia2 += delta;
+		if (timerRumia2 > 0.5) {
+//			enemyShot1();
+			timerRumia2 = 0;
 		}
 		if (bossMovsCount > 0) {
 			if (boss.position.x < Gdx.graphics.getWidth() - 128 - 300)
 				boss.position.x += 6;
 			else {
-				if(timerRumia==0){
-//					enemyShot1();
+				if (timerRumia == 0) {
+					// enemyShot1();
 				}
 				timerRumia += delta;
 				if (timerRumia > 1) {
@@ -67,11 +69,11 @@ public class Simulation {
 				}
 			}
 		} else {
-			if (boss.position.x > 300 )
+			if (boss.position.x > 300)
 				boss.position.x -= 6;
 			else {
-				if(timerRumia==0){
-//					enemyShot1();
+				if (timerRumia == 0) {
+					// enemyShot1();
 				}
 				timerRumia += delta;
 				if (timerRumia > 1) {
@@ -115,7 +117,7 @@ public class Simulation {
 	}
 	
 	public void setReimuNormalSpeed(){
-		reimu.slowMode = true;
+		reimu.slowMode = false;
 		Reimu.reimu_VELOCITY =150;
 	}
 	
@@ -141,6 +143,7 @@ public class Simulation {
 		for (int i = 0; i < enemyshots.size(); i++) {
 			enemyShot = enemyshots.get(i);
 			enemyShot.updateTowards(delta);
+			enemyShot.center.set(enemyShot.position.x+28, enemyShot.position.y+30);
 
 			// gl.glPushMatrix();
 			// gl.glTranslatef(shot.position.x, shot.position.y,
@@ -169,7 +172,6 @@ public class Simulation {
 	}
 	
 	private void enemyShot1(){
-//		System.out.println(enemyshots.size());
 		if(! boss.isExploding){
 			Vector2 center = new Vector2(boss.position);
 			Vector2 toward = new Vector2();
@@ -181,9 +183,18 @@ public class Simulation {
 				degreeplus+= MathUtils.PI/7.4;
 //				toward.set(MathUtils.cos(2*MathUtils.PI * i/6), MathUtils.sin(2*MathUtils.PI * i/6));
 				toward.set(MathUtils.cos(degreeplus), MathUtils.sin(degreeplus));
-				System.out.println(degreeplus);
 				enemyShot = new EnemyShot(center.add(toward),toward);
 				enemyshots.add(enemyShot);
+			}
+		}
+	}
+	
+	private void updateCollision(float delta){
+		for (int i = 0; i < enemyshots.size(); i++) {
+			enemyShot = enemyshots.get(i);
+			if(Math.abs(enemyShot.center.x-reimu.center.x )<enemyShot.length &&
+					Math.abs(enemyShot.center.y -reimu.center.y )<enemyShot.length){
+				System.out.println("collision "+i);
 			}
 		}
 	}
