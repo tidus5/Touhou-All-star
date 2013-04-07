@@ -3,6 +3,8 @@ bin/
 gen/
 libs/
 assets/
+*.cache
+
 
 # Package Files #
 *.jar
