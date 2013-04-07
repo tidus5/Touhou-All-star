@@ -14,19 +14,13 @@ import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-<<<<<<< HEAD
-import com.badlogic.gdx.math.Matrix4;
-
-=======
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateByAction;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateToAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
->>>>>>> 2f7ee1f1e68d4a1fabd9d36db99527c2138130f4
 
 public class RendererGL10 implements Renderer {
 	private SpriteBatch spriteBatch;
@@ -35,27 +29,7 @@ public class RendererGL10 implements Renderer {
 	private Texture reimuShotTexture;
 	private Texture enemyShotTexture;
 	private Texture backgroundTexture;
-<<<<<<< HEAD
 	
-	private Sprite enemyShotSprite;
-	
-	private PerspectiveCamera camera;
-	private final Matrix4 viewMatrix = new Matrix4();
-	private final Matrix4 transformMatrix = new Matrix4();
-	
-	public RendererGL10 () {
-		spriteBatch = new SpriteBatch();
-		reimuTexture = new Texture(Gdx.files.internal("reimu.png")); 
-		rumiaTexture = new Texture(Gdx.files.internal("rumia.png"));
-		reimuShotTexture = new Texture(Gdx.files.internal("reimushot.png"));
-		enemyShotTexture = new Texture(Gdx.files.internal("enemyshot.png"));
-		backgroundTexture = new Texture(Gdx.files.internal("background.jpg"));
-		
-		enemyShotSprite = new Sprite(enemyShotTexture, 0, 0, 128, 64);
-		enemyShotSprite.setPosition(0, 0);
-		
-		camera = new PerspectiveCamera(67, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-=======
 	private Texture pointTexture;
 	private Texture yuTexture;
 
@@ -121,14 +95,12 @@ public class RendererGL10 implements Renderer {
 
 		camera = new PerspectiveCamera(67, Gdx.graphics.getWidth(),
 				Gdx.graphics.getHeight());
->>>>>>> 2f7ee1f1e68d4a1fabd9d36db99527c2138130f4
 	}
 
 	@Override
 	public void render(Simulation simulation, float delta) {
 		GL10 gl = Gdx.graphics.getGL10();
 		gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
-<<<<<<< HEAD
 //		gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		
 		renderBackground();
@@ -142,7 +114,6 @@ public class RendererGL10 implements Renderer {
 		renderReimu(gl, simulation.reimu);
 		renderBoss(gl, simulation.boss);
 		
-=======
 		// gl.glViewport(0, 0, Gdx.graphics.getWidth(),
 		// Gdx.graphics.getHeight());
 		
@@ -161,68 +132,16 @@ public class RendererGL10 implements Renderer {
 		renderReimu(gl, simulation.reimu);
 		renderBoss(gl, simulation.boss);
 
->>>>>>> 2f7ee1f1e68d4a1fabd9d36db99527c2138130f4
 		renderReimuShots(gl, simulation.reimushots);
 		renderEnemyShots(gl, simulation.enemyshots);
 	}
 
 	@Override
 	public void dispose() {
-<<<<<<< HEAD
 		// TODO Auto-generated method stub
 		
 	}
 	
-	private void renderBackground () {
-//		viewMatrix.setToOrtho2D(0, 0, 400, 320);
-//		spriteBatch.setProjectionMatrix(viewMatrix);
-//		spriteBatch.setTransformMatrix(transformMatrix);
-		spriteBatch.begin();
-//		spriteBatch.disableBlending();
-//		spriteBatch.setColor(Color.WHITE);
-		spriteBatch.draw(backgroundTexture, 0, -250, 1024, 1024, 0, 0, 1024, 1024, false, false);
-		
-		spriteBatch.end();
-	}
-	
-	private void setProjectionAndCamera (GL10 gl, Reimu reimu) {
-		camera.position.set(reimu.position.x, 6, 2);
-		camera.direction.set(reimu.position.x, 0, -4).sub(camera.position).nor();
-		camera.update();
-		camera.apply(gl);
-	}
-	
-	private void renderReimu (GL10 gl, Reimu reimu) {
-		if (reimu.isExploding) return;
-		spriteBatch.begin();
-//		spriteBatch.disableBlending();
-//		gl.glPushMatrix();
-//		gl.glTranslatef(reimu.position.x, reimu.position.y, reimu.position.z);
-//		gl.glRotatef(45 * (-Gdx.input.getAccelerometerY() / 5), 0, 0, 1);
-//		gl.glRotatef(180, 0, 1, 0);
-		spriteBatch.draw(reimuTexture,reimu.position.x,reimu.position.y);
-		spriteBatch.end();
-//		gl.glPopMatrix();
-		
-	}
-	
-	private void renderBoss (GL10 gl, Boss boss) {
-		if (boss.isExploding) return;
-		spriteBatch.begin();
-//		gl.glPushMatrix();
-//		gl.glTranslatef(boss.position.x, boss.position.y, boss.position.z);
-//		gl.glRotatef(45 * (-Gdx.input.getAccelerometerY() / 5), 0, 0, 1);
-//		gl.glRotatef(180, 0, 1, 0);
-		spriteBatch.draw(rumiaTexture,boss.position.x,boss.position.y);
-//		gl.glPopMatrix();
-		
-		spriteBatch.end();
-	}
-	
-=======
-		stage.dispose();
-		spriteBatch.dispose();
-	}
 
 	private void renderBackground() {
 		// viewMatrix.setToOrtho2D(0, 0, 400, 320);
@@ -287,47 +206,28 @@ public class RendererGL10 implements Renderer {
 		spriteBatch.end();
 	}
 
->>>>>>> 2f7ee1f1e68d4a1fabd9d36db99527c2138130f4
 	private void renderReimuShots(GL10 gl, ArrayList<ReimuShot> reimushots) {
 		gl.glColor4f(1, 1, 0, 1);
 		spriteBatch.begin();
 		spriteBatch.enableBlending();
 		for (int i = 0; i < reimushots.size(); i++) {
 			ReimuShot shot = reimushots.get(i);
-<<<<<<< HEAD
-//			gl.glPushMatrix();
-//			gl.glTranslatef(shot.position.x, shot.position.y, shot.position.z);
-			spriteBatch.draw(reimuShotTexture,shot.position.x, shot.position.y);
-//			gl.glPopMatrix();
-=======
-			// gl.glPushMatrix();
-			// gl.glTranslatef(shot.position.x, shot.position.y,
 			// shot.position.z);
 			spriteBatch
 					.draw(reimuShotTexture, shot.position.x, shot.position.y);
 			// gl.glPopMatrix();
->>>>>>> 2f7ee1f1e68d4a1fabd9d36db99527c2138130f4
 		}
 		spriteBatch.end();
 		gl.glColor4f(1, 1, 1, 1);
 	}
 
 	private void renderEnemyShots(GL10 gl, ArrayList<EnemyShot> enemyshots) {
-<<<<<<< HEAD
-//		System.out.println(enemyshots.size());
-=======
->>>>>>> 2f7ee1f1e68d4a1fabd9d36db99527c2138130f4
 		spriteBatch.begin();
 		spriteBatch.enableBlending();
 		for (int i = 0; i < enemyshots.size(); i++) {
 			EnemyShot shot = enemyshots.get(i);
 			enemyShotSprite.setPosition(shot.position.x, shot.position.y);
 			enemyShotSprite.draw(spriteBatch);
-<<<<<<< HEAD
-		}
-		spriteBatch.end();
-	}
-=======
 
 			// pointSprite.setPosition(shot.center.x, shot.center.y);
 			// pointSprite.draw(spriteBatch);
@@ -335,5 +235,4 @@ public class RendererGL10 implements Renderer {
 		spriteBatch.end();
 	}
 
->>>>>>> 2f7ee1f1e68d4a1fabd9d36db99527c2138130f4
 }
