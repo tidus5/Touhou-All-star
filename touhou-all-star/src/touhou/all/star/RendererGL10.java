@@ -52,7 +52,7 @@ public class RendererGL10 implements Renderer {
 		
 		spriteBatch = new SpriteBatch();
 		
-		TextureAtlas atlas=new TextureAtlas(Gdx.files.internal("touhou_pic.pack")); //¸ù¾İpackÎÄ¼ş»ñÈ¡ËùÓĞÍ¼Æ¬ 
+		TextureAtlas atlas=new TextureAtlas(Gdx.files.internal("touhou_pic.pack")); //æ ¹æ®packæ–‡ä»¶è·å–æ‰€æœ‰å›¾ç‰‡ 
 
 		backgroundTexture = new Texture(Gdx.files.internal("background.jpg"));
 		
