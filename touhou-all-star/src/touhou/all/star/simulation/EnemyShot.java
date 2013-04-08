@@ -23,7 +23,6 @@ public class EnemyShot {
 				|| position.y < 2*Simulation.PLAYFIELD_MIN_Y)
 		{
 			hasLeftField = true;
-			System.out.println(position);
 		}
 	}
 

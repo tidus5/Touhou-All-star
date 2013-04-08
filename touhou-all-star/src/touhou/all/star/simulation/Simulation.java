@@ -52,7 +52,7 @@ public class Simulation {
 	public void updateBoss(float delta){
 		timerRumia2 += delta;
 		if (timerRumia2 > 0.5) {
-//			enemyShot1();
+			enemyShot1();
 			timerRumia2 = 0;
 		}
 		if (bossMovsCount > 0) {
@@ -194,7 +194,7 @@ public class Simulation {
 			enemyShot = enemyshots.get(i);
 			if(Math.abs(enemyShot.center.x-reimu.center.x )<enemyShot.length &&
 					Math.abs(enemyShot.center.y -reimu.center.y )<enemyShot.length){
-				System.out.println("collision "+i);
+//				System.out.println("collision "+i);
 			}
 		}
 	}

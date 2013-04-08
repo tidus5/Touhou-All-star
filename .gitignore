@@ -4,6 +4,8 @@ gen/
 libs/
 assets/
 *.cache
+gdx-texturepacker*/
+hiero.jar
 
 
 # Package Files #

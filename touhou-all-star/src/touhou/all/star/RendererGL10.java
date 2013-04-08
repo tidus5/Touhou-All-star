@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.PerspectiveCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -30,7 +31,6 @@ public class RendererGL10 implements Renderer {
 	private Texture enemyShotTexture;
 	private Texture backgroundTexture;
 	
-	private Texture pointTexture;
 	private Texture yuTexture;
 
 	private Sprite reimuSprite;
@@ -43,38 +43,37 @@ public class RendererGL10 implements Renderer {
 	private RotateToAction rotateToAction;
 	private MoveToAction movetoAction;
 	private Image yuImage;
-	private TextureRegion yuRegion;
+	private TextureRegion rumiaTextureRegion;
+	private TextureRegion reimuShotTextureRegion;
 
 	private PerspectiveCamera camera;
-	private final Matrix4 viewMatrix = new Matrix4();
-	private final Matrix4 transformMatrix = new Matrix4();
 
 	public RendererGL10() {
+		
 		spriteBatch = new SpriteBatch();
-		reimuTexture = new Texture(Gdx.files.internal("reimu.png"));
-		rumiaTexture = new Texture(Gdx.files.internal("rumia.png"));
-		reimuShotTexture = new Texture(Gdx.files.internal("reimushot.png"));
-		enemyShotTexture = new Texture(Gdx.files.internal("enemyshot.png"));
-		pointTexture = new Texture(Gdx.files.internal("point.png"));
-		yuTexture = new Texture(Gdx.files.internal("yu.png"));
-		backgroundTexture = new Texture(Gdx.files.internal("background.jpg"));
+		
+		TextureAtlas atlas=new TextureAtlas(Gdx.files.internal("touhou_pic.pack")); //根据pack文件获取所有图片 
 
-		reimuSprite = new Sprite(reimuTexture, 0, 0, 60, 80);
-		enemyShotSprite = new Sprite(enemyShotTexture, 0, 0, 60, 64);
+		backgroundTexture = new Texture(Gdx.files.internal("background.jpg"));
+		
+		rumiaTextureRegion =atlas.findRegion("rumia");
+		reimuShotTextureRegion = atlas.findRegion("reimushot");
+
+
+		reimuSprite = new Sprite(atlas.findRegion("reimu"));
+		enemyShotSprite = new Sprite(atlas.findRegion("enemyshot"));
 		enemyShotSprite.setPosition(0, 0);
-		judgePointSprite = new Sprite(enemyShotTexture, 64, 0, 14, 18);
-		pointSprite = new Sprite(pointTexture, 0, 0, 4, 4);
+		judgePointSprite = new Sprite(atlas.findRegion("judgepoint"));
+		pointSprite = new Sprite(atlas.findRegion("point"));
 
 		stage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),
 				true);
-		yuRegion = new TextureRegion(yuTexture, 64, 64);
-		yuImage = new Image(yuRegion);
+		yuImage = new Image(atlas.findRegion("yu"));
 		yuImage.setPosition(50, 50);
 
 		movetoAction = new MoveToAction();
 		movetoAction.setPosition(300, 300);
 		movetoAction.setDuration(30);
-		
 
 //		yuImage.addAction(movetoAction);
 		
@@ -178,12 +177,12 @@ public class RendererGL10 implements Renderer {
 
 		reimuSprite.setPosition(reimu.position.x, reimu.position.y);
 		reimuSprite.draw(spriteBatch);
-		reimu.center.set(reimu.position.x + 25, reimu.position.y + 40);
+		reimu.center.set(reimu.position.x + 18, reimu.position.y + 35);
 
 		if (reimu.slowMode) {
 			judgePointSprite.setPosition(reimu.center.x, reimu.center.y);
 			judgePointSprite.draw(spriteBatch);
-			spriteBatch.draw(pointTexture, reimu.position.x, reimu.position.y);
+			spriteBatch.draw(pointSprite, reimu.position.x, reimu.position.y);
 			pointSprite.setPosition(reimu.position.x, reimu.position.y);
 			pointSprite.draw(spriteBatch);
 		}
@@ -200,7 +199,7 @@ public class RendererGL10 implements Renderer {
 		// gl.glTranslatef(boss.position.x, boss.position.y, boss.position.z);
 		// gl.glRotatef(45 * (-Gdx.input.getAccelerometerY() / 5), 0, 0, 1);
 		// gl.glRotatef(180, 0, 1, 0);
-		spriteBatch.draw(rumiaTexture, boss.position.x, boss.position.y);
+		spriteBatch.draw(rumiaTextureRegion, boss.position.x, boss.position.y);
 		// gl.glPopMatrix();
 
 		spriteBatch.end();
@@ -214,7 +213,7 @@ public class RendererGL10 implements Renderer {
 			ReimuShot shot = reimushots.get(i);
 			// shot.position.z);
 			spriteBatch
-					.draw(reimuShotTexture, shot.position.x, shot.position.y);
+					.draw(reimuShotTextureRegion, shot.position.x, shot.position.y);
 			// gl.glPopMatrix();
 		}
 		spriteBatch.end();
