@@ -14,6 +14,11 @@ public class Reimu {
 	public boolean isExploding = false;
 	public float explodeTime = 0;
 	public boolean slowMode = false;
+	public boolean invincible = false;
+	public boolean rebirth = false;
+	public boolean rebirthWhile = false;
+	public boolean dead = false;
+	public int rebirthTime = 3;
 	
 	public void update (float delta) {
 //		if (isExploding) {

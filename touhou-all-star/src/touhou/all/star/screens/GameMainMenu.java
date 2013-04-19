@@ -15,11 +15,8 @@ import com.badlogic.gdx.math.Matrix4;
 public class GameMainMenu extends GameScreen {
 	private final SpriteBatch spriteBatch;
 	private final Texture background;
-	private final Texture reimu;
 	private boolean isDone = false;
-	private final Matrix4 viewMatrix = new Matrix4();
-	private final Matrix4 transformMatrix = new Matrix4();
-	public static final String FONT_CHARACTERS = "¶«·½È«Ã÷ÐÇ";
+	public static final String FONT_CHARACTERS = "ä¸œæ–¹å…¨æ˜Žæ˜Ÿ";
 	
 	FreeTypeFontGenerator generator;
 	FreeTypeBitmapFontData fontData;
@@ -29,7 +26,6 @@ public class GameMainMenu extends GameScreen {
 	public GameMainMenu() {
 		spriteBatch = new SpriteBatch();
 		background = new Texture(Gdx.files.internal("MainMenuBackground.jpg"));
-		reimu= new Texture(Gdx.files.internal("reimu.png"));
 		background.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		generator = new FreeTypeFontGenerator(Gdx.files.internal("font1.ttf"));
@@ -68,7 +64,6 @@ public class GameMainMenu extends GameScreen {
 		spriteBatch.enableBlending();
 		title.draw(spriteBatch, FONT_CHARACTERS, 350, 760);
 		spriteBatch.end();
-		
 	}
 	
 	

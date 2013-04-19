@@ -3,6 +3,7 @@ package touhou.all.star.screens;
 import touhou.all.star.Renderer;
 import touhou.all.star.RendererGL10;
 import touhou.all.star.RendererGL20;
+import touhou.all.star.simulation.Reimu;
 import touhou.all.star.simulation.Simulation;
 import touhou.all.star.simulation.SimulationListener;
 
@@ -53,11 +54,28 @@ public class GameLoop extends GameScreen implements SimulationListener {
 	@Override
 	public void update(float delta) {
 		simulation.update(delta);
-
-		if (Gdx.input.isKeyPressed(Keys.DPAD_LEFT)|| Gdx.input.isKeyPressed(Keys.A))simulation.moveReimuLeft(delta, 3.5f);
-		if (Gdx.input.isKeyPressed(Keys.DPAD_RIGHT)|| Gdx.input.isKeyPressed(Keys.D))simulation.moveReimuRight(delta, 3.5f);
-		if (Gdx.input.isKeyPressed(Keys.DPAD_UP)|| Gdx.input.isKeyPressed(Keys.W))simulation.moveReimuUp(delta, 3.5f);
-		if (Gdx.input.isKeyPressed(Keys.DPAD_DOWN)|| Gdx.input.isKeyPressed(Keys.S))simulation.moveReimuDown(delta, 3.5f);
+		if (simulation.reimu.isExploding == false) {
+			if (Gdx.input.isKeyPressed(Keys.DPAD_UP)|| Gdx.input.isKeyPressed(Keys.W))
+				simulation.moveReimuUp(delta, 3.5f);
+			if (Gdx.input.isKeyPressed(Keys.DPAD_DOWN)|| Gdx.input.isKeyPressed(Keys.S))
+				simulation.moveReimuDown(delta, 3.5f);
+			if (Gdx.input.isKeyPressed(Keys.DPAD_LEFT)|| Gdx.input.isKeyPressed(Keys.A))
+				simulation.moveReimuLeft(delta, 3.5f);
+			if (Gdx.input.isKeyPressed(Keys.DPAD_RIGHT)|| Gdx.input.isKeyPressed(Keys.D))
+				simulation.moveReimuRight(delta, 3.5f);
+		}else{
+			if(simulation.reimu.rebirth){
+				simulation.reimu.position.set(Gdx.graphics.getWidth()/2, 20);
+				simulation.reimu.rebirth = false;
+				simulation.reimu.rebirthWhile = true;
+			}
+			if(simulation.reimu.rebirthWhile){
+				simulation.reimu.position.y += delta * Reimu.reimu_VELOCITY * 2.5f;
+				if(simulation.reimu.position.y>30){
+					simulation.reimu.rebirthWhile = false;
+				}	
+			}
+		}
 		if (Gdx.input.isKeyPressed(Keys.SHIFT_LEFT)) {
 			simulation.setReimuSlowSpeed();
 		} else {

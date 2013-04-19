@@ -6,6 +6,8 @@ public class ReimuShot {
 	
 	public static float SHOT_VELOCITY = 10;
 	public final Vector2 position = new Vector2();
+	public int width=18;
+	public int height=60;
 	public boolean hasLeftField = false;
 	
 	public ReimuShot (Vector2 position) {

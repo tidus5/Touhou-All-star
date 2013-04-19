@@ -48,7 +48,7 @@ public class TouhouAllStar extends Game {
 //
 //		Image image = new Image(texture);
 //		image.setX(280f);
-//		image.setY(280f); // Ëæ»ú³öÏÖ
+//		image.setY(280f); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //		MoveToAction action = new MoveToAction();
 //		action.setPosition(0f, 0f);
 //		action.setDuration(duration);
