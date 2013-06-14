@@ -10,8 +10,8 @@ public class Main {
 		config.title = "touhou-all-star";
 		config.useGL20 = false;
 		config.vSyncEnabled = true;
-		config.width = 800;
-		config.height = 600;
+		config.width = 1024;
+		config.height = 768;
 		
 		new LwjglApplication(new TouhouAllStar(), config);
 	}

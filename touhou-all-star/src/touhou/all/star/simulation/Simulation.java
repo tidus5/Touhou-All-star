@@ -52,17 +52,17 @@ public class Simulation {
 
 	public void updateBoss(float delta) {
 		timerRumia2 += delta;
-		if (timerRumia2 > 0.5) {
-			enemyShot1();
-			timerRumia2 = 0;
-		}
-		if(timerRumia2==-1){
+//		if (timerRumia2 > 0.5) {
+//			enemyShot1();
+//			timerRumia2 = 0;
+//		}
+		if(timerRumia2>-10){
 		if (bossMovsCount > 0) {
 			if (boss.position.x < Gdx.graphics.getWidth() - 128 - 300)
 				boss.position.x += 6;
 			else {
 				if (timerRumia == 0) {
-					// enemyShot1();
+					 enemyShot1();
 				}
 				timerRumia += delta;
 				if (timerRumia > 1) {
@@ -75,7 +75,7 @@ public class Simulation {
 				boss.position.x -= 6;
 			else {
 				if (timerRumia == 0) {
-					// enemyShot1();
+					 enemyShot1();
 				}
 				timerRumia += delta;
 				if (timerRumia > 1) {

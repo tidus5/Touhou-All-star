@@ -20,6 +20,7 @@ public class TouhouAllStar extends Game {
 	private Stage stage;
 	private Texture texture;
 	private FPSLogger fps;
+	GameScreen currentScreen;
 
 	@Override
 	public void create() {
@@ -90,6 +91,11 @@ public class TouhouAllStar extends Game {
 	public void dispose() {
 //		texture.dispose();
 //		stage.dispose();
+	}
+	
+
+	@Override
+	public void resize (int width, int height) {
 	}
 	
 	@Override

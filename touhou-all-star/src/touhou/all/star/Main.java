@@ -13,6 +13,8 @@ public class Main {
 		config.vSyncEnabled = true;
 		config.width = 1024;
 		config.height = 768;
+		config.resizable = false;
+		
 		
 		new LwjglApplication(new TouhouAllStar(), config);
 	}
