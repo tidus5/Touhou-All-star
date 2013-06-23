@@ -72,7 +72,7 @@ public class RendererGL10 implements Renderer {
 
 	TextureAtlas atlas;
 	TextureRegion currentFrame;
-	
+
 	ProgressBar bar;
 
 	public RendererGL10() {
@@ -93,15 +93,15 @@ public class RendererGL10 implements Renderer {
 		enemyShotSprite.setPosition(0, 0);
 		judgePointSprite = new Sprite(atlas.findRegion("judgepoint"));
 		pointSprite = new Sprite(atlas.findRegion("point"));
-		whitepointSprite = new Sprite(new Texture(Gdx.files.internal("whitepoint.png")));
+		whitepointSprite = new Sprite(new Texture(
+				Gdx.files.internal("whitepoint.png")));
 		reimuSprite0 = new Sprite(atlas.findRegion("reimu"));
 		reimuSprite1 = new Sprite(atlas.findRegion("reimu1"));
 		reimuSprite2 = new Sprite(atlas.findRegion("reimu2"));
 		yuImage = new Image(atlas.findRegion("yu"));
 
-		
-		bar=new ProgressBar(0,0);
-		
+		bar = new ProgressBar(0, 0);
+
 		stage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),
 				true);
 
@@ -137,7 +137,7 @@ public class RendererGL10 implements Renderer {
 				walksFrame[i] = reimuRegion0;
 			} else if (i % 3 == 1) {
 				walksFrame[i] = reimuRegion1;
-			}else{
+			} else {
 				walksFrame[i] = reimuRregion2;
 			}
 		}
@@ -161,16 +161,16 @@ public class RendererGL10 implements Renderer {
 		renderBackground();
 
 		stage.act(Gdx.graphics.getDeltaTime());
-		
-		renderReimu(gl, simulation.reimu,delta);
+
+		renderReimu(gl, simulation.reimu, delta);
 		renderBoss(gl, simulation.boss);
 		renderReimuShots(gl, simulation.reimushots);
 		renderEnemyShots(gl, simulation.enemyshots);
 		renderParticle();
 		updateBossLifeBar(gl, simulation.boss);
-		
+
 		stage.draw();
-		if(simulation.reimu.dead)
+		if (simulation.reimu.dead)
 			stage.clear();
 	}
 
@@ -212,8 +212,8 @@ public class RendererGL10 implements Renderer {
 		camera.apply(gl);
 	}
 
-	void renderReimu(GL10 gl, Reimu reimu,float delta) {
-		if (reimu.dead){
+	void renderReimu(GL10 gl, Reimu reimu, float delta) {
+		if (reimu.dead) {
 			return;
 		}
 		spriteBatch.begin();
@@ -233,8 +233,8 @@ public class RendererGL10 implements Renderer {
 			judgePointSprite.setPosition(reimu.center.x, reimu.center.y);
 			judgePointSprite.draw(spriteBatch);
 			spriteBatch.draw(pointSprite, reimu.position.x, reimu.position.y);
-//			pointSprite.setPosition(reimu.position.x, reimu.position.y);
-//			pointSprite.draw(spriteBatch);
+			// pointSprite.setPosition(reimu.position.x, reimu.position.y);
+			// pointSprite.draw(spriteBatch);
 		}
 		spriteBatch.end();
 		// gl.glPopMatrix();
@@ -246,11 +246,14 @@ public class RendererGL10 implements Renderer {
 		spriteBatch.begin();
 		spriteBatch.draw(rumiaTextureRegion, boss.position.x, boss.position.y);
 		spriteBatch.draw(whitepointSprite, boss.center.x, boss.center.y);
-		
-//		spriteBatch.draw(whitepointSprite, boss.position.x, boss.position.y);
-//		spriteBatch.draw(whitepointSprite, boss.position.x, boss.position.y+boss.height);
-//		spriteBatch.draw(whitepointSprite, boss.position.x+boss.width, boss.position.y);
-//		spriteBatch.draw(whitepointSprite, boss.position.x+boss.width, boss.position.y+boss.height);
+
+		// spriteBatch.draw(whitepointSprite, boss.position.x, boss.position.y);
+		// spriteBatch.draw(whitepointSprite, boss.position.x,
+		// boss.position.y+boss.height);
+		// spriteBatch.draw(whitepointSprite, boss.position.x+boss.width,
+		// boss.position.y);
+		// spriteBatch.draw(whitepointSprite, boss.position.x+boss.width,
+		// boss.position.y+boss.height);
 		spriteBatch.end();
 	}
 
@@ -260,12 +263,16 @@ public class RendererGL10 implements Renderer {
 		spriteBatch.enableBlending();
 		for (int i = 0; i < reimushots.size(); i++) {
 			ReimuShot shot = reimushots.get(i);
-			spriteBatch.draw(reimuShotTextureRegion, shot.position.x,shot.position.y);
-			
-//			spriteBatch.draw(pointSprite, shot.position.x, shot.position.y);
-//			spriteBatch.draw(pointSprite, shot.position.x, shot.position.y+shot.height);
-//			spriteBatch.draw(pointSprite, shot.position.x+shot.width, shot.position.y);
-//			spriteBatch.draw(pointSprite, shot.position.x+shot.width, shot.position.y+shot.height);
+			spriteBatch.draw(reimuShotTextureRegion, shot.position.x,
+					shot.position.y);
+
+			// spriteBatch.draw(pointSprite, shot.position.x, shot.position.y);
+			// spriteBatch.draw(pointSprite, shot.position.x,
+			// shot.position.y+shot.height);
+			// spriteBatch.draw(pointSprite, shot.position.x+shot.width,
+			// shot.position.y);
+			// spriteBatch.draw(pointSprite, shot.position.x+shot.width,
+			// shot.position.y+shot.height);
 		}
 		spriteBatch.end();
 		gl.glColor4f(1, 1, 1, 1);
@@ -311,13 +318,13 @@ public class RendererGL10 implements Renderer {
 			}
 		}
 	}
-	
-	void updateBossLifeBar(GL10 gl, Boss boss){
-//		 if(bar.progress<100)
-//	           bar.progress+=0.5;
-//	       //重新置零
-//	       if(bar.progress==100)
-//	           bar.progress=0;
+
+	void updateBossLifeBar(GL10 gl, Boss boss) {
+		// if(bar.progress<100)
+		// bar.progress+=0.5;
+		// //重新置零
+		// if(bar.progress==100)
+		// bar.progress=0;
 		bar.progress = boss.HP;
 	}
 }

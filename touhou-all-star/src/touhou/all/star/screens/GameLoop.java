@@ -34,7 +34,6 @@ public class GameLoop extends GameScreen implements SimulationListener {
 			buttonsPressed--;
 			return true;
 		}
-
 	};
 
 	public GameLoop() {
@@ -81,8 +80,8 @@ public class GameLoop extends GameScreen implements SimulationListener {
 		} else {
 			simulation.setReimuNormalSpeed();
 		}
-		if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(Keys.Z))simulation.shot();
-
+		if (Gdx.input.isTouched() || Gdx.input.isKeyPressed(Keys.Z))
+			simulation.shot();
 	}
 
 	@Override

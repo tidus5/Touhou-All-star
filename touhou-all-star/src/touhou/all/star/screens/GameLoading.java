@@ -18,7 +18,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateByAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
-public class GameMainMenu extends GameScreen {
+public class GameLoading extends GameScreen {
 	private final SpriteBatch spriteBatch;
 	private final Texture background;
 	private boolean isDone = false;
@@ -46,7 +46,7 @@ public class GameMainMenu extends GameScreen {
 	BitmapFont font3;
 	BitmapFont font4;
 
-	public GameMainMenu() {
+	public GameLoading() {
 		Texture.setEnforcePotImages(false);
 		spriteBatch = new SpriteBatch();		
 		background = new Texture(Gdx.files.internal("background1_mix.png"));
@@ -72,20 +72,14 @@ public class GameMainMenu extends GameScreen {
 		stage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 
                 true); 
 		
-		
-		 for (int i = 0; i < 10; i++) {
-			 
-			 
-		 }
 		 Gdx.input.setInputProcessor(stage); 
 	}
 
 	@Override
 	public void update (float delta) {
-		System.out.println(menuDuration);
-		if (menuDuration > 4f) {
+		if (menuDuration > 1f) {       // time to enable skipping
 			if (Gdx.input.justTouched() || Gdx.input.isKeyPressed(Keys.ENTER)
-					|| Gdx.input.isKeyPressed(Keys.SPACE) || menuDuration > 5f) {
+					|| Gdx.input.isKeyPressed(Keys.SPACE) || menuDuration > 5f) {  // time to enable skipping
 				isDone = true;
 			}
 		}

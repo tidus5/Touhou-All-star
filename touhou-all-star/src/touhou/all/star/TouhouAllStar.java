@@ -2,8 +2,9 @@ package touhou.all.star;
 
 
 import touhou.all.star.screens.GameLoop;
-import touhou.all.star.screens.GameMainMenu;
+import touhou.all.star.screens.GameLoading;
 import touhou.all.star.screens.GameScreen;
+import touhou.all.star.screens.GameMenu;
 
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Game;
@@ -24,7 +25,7 @@ public class TouhouAllStar extends Game {
 
 	@Override
 	public void create() {
-		setScreen(new GameMainMenu());
+		setScreen(new GameLoading());
 		
 		Gdx.input.setInputProcessor(new InputAdapter() {
 			@Override
@@ -68,7 +69,11 @@ public class TouhouAllStar extends Game {
 		if (currentScreen.isDone()) {
 			currentScreen.dispose();
 
-			if (currentScreen instanceof GameMainMenu) {
+			if (currentScreen instanceof GameLoading) {
+				setScreen(new GameMenu());
+			}
+			
+			if (currentScreen instanceof GameMenu) {
 				setScreen(new GameLoop());
 			}
 		}
