@@ -40,6 +40,7 @@ public class GameLoop extends GameScreen implements SimulationListener {
 		simulation = new Simulation();
 		renderer = Gdx.graphics.isGL20Available() ? new RendererGL20()
 				: new RendererGL10();
+//		renderer = new RendererGL10();
 
 		if (Controllers.getControllers().size > 0) {
 			Controller controller = Controllers.getControllers().get(0);

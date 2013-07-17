@@ -156,8 +156,12 @@ public class RendererGL10 implements Renderer {
 	@Override
 	public void render(Simulation simulation, float delta) {
 		GL10 gl = Gdx.graphics.getGL10();
+		if(gl==null)
+			return;
 		gl.glClear(GL10.GL_COLOR_BUFFER_BIT | GL10.GL_DEPTH_BUFFER_BIT);
 
+		gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		
 		renderBackground();
 
 		stage.act(Gdx.graphics.getDeltaTime());

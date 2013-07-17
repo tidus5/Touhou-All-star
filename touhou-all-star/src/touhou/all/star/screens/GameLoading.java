@@ -2,6 +2,8 @@ package touhou.all.star.screens;
 
 import java.util.ArrayList;
 
+import sun.rmi.runtime.Log;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
@@ -19,14 +21,9 @@ import com.badlogic.gdx.scenes.scene2d.actions.RotateByAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public class GameLoading extends GameScreen {
-	private final SpriteBatch spriteBatch;
-	private final Texture background;
+
 	private boolean isDone = false;
-	private Stage stage; 
-    private Texture texture;
     private float menuDuration=0;
-    private RotateByAction rotateAction;
-    private MoveByAction moveAction;
     private ArrayList<Flower> flowerArray = new ArrayList<Flower>();
     private ArrayList<Float> flowerDuration = new ArrayList<Float>();
     
@@ -38,9 +35,15 @@ public class GameLoading extends GameScreen {
 	public static final String caution = "弹幕过敏者注意";
 	public static final String loading = "Loading...";
 	
+	private SpriteBatch spriteBatch;
+	private Stage stage; 
+    private Texture texture;
+	private Texture background;
+    private RotateByAction rotateAction;
+    private MoveByAction moveAction;
+	
 	FreeTypeFontGenerator generator;
 	FreeTypeBitmapFontData fontData;
-	private BitmapFont freetypeBitmapFont; 
 	BitmapFont font1;
 	BitmapFont font2;
 	BitmapFont font3;
@@ -156,15 +159,20 @@ public class GameLoading extends GameScreen {
 		
 		spriteBatch.begin();
 		spriteBatch.setColor(Color.WHITE);
-		spriteBatch.draw(background, 0, 0, 1024, 768, 0, 0, 1024, 768, false, false);
+		spriteBatch.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), 0, 0, 
+				background.getWidth(), background.getHeight(), false, false);
 //		spriteBatch.draw(reimu, 0, 0, 128, 128, 0, 0, 128, 128, false, false);
+		
+		float transx = Gdx.graphics.getWidth() * 1.0f / background.getWidth();      // to put words to the right place of pic
+		float transy = Gdx.graphics.getHeight() * 1.0f / background.getHeight();
+		
 		spriteBatch.enableBlending();
-		font1.draw(spriteBatch, mainTitle, 380, 560);
-		font2.draw(spriteBatch, version, 400, 500);
-		font2.draw(spriteBatch, produceby, 450, 350);
-		font2.draw(spriteBatch, alice, 400, 300);
-		font3.draw(spriteBatch, caution, 680, 160);
-		font4.draw(spriteBatch, loading, 800, 120);
+		font1.draw(spriteBatch, mainTitle, 380 * transx , 560 * transy );
+		font2.draw(spriteBatch, version, 400 * transx, 500 * transy);
+		font2.draw(spriteBatch, produceby, 450 * transx, 350 * transy);
+		font2.draw(spriteBatch, alice, 400 * transx, 300 * transy);
+		font3.draw(spriteBatch, caution, 680 * transx, 160 * transy);
+		font4.draw(spriteBatch, loading, 800 * transx, 120 * transy);
 		spriteBatch.end();
 		
 		stage.act(Gdx.graphics.getDeltaTime());
@@ -176,6 +184,10 @@ public class GameLoading extends GameScreen {
 		spriteBatch.dispose();
 		background.dispose();
 		font1.dispose();
+		font2.dispose();
+		font3.dispose();
+		font4.dispose();
+		stage.dispose();
 	}
 }
 

@@ -52,32 +52,53 @@ public class GameMenu extends GameScreen {
 
 	FreeTypeFontGenerator generator;
 	FreeTypeBitmapFontData fontData;
-	private BitmapFont freetypeBitmapFont;
 	BitmapFont font1;
 	BitmapFont font2;
 	BitmapFont font3;
 	BitmapFont font4;
 
+	float transx ;
+	float transy ;
 	public GameMenu() {
 		Texture.setEnforcePotImages(false);
 		spriteBatch = new SpriteBatch();
 
 		texture = new Texture(Gdx.files.internal("background1_2.png"));
 		background = new Image(texture);
+		
+		 transx = Gdx.graphics.getWidth() * 1.0f / background.getWidth();      // to put words to the right place of pic
+		 transy = Gdx.graphics.getHeight() * 1.0f / background.getHeight();
+		
+		background.setHeight(Gdx.graphics.getHeight());
+		background.setWidth(Gdx.graphics.getWidth());
 		texture = new Texture(Gdx.files.internal("start_back_0.png"));
 		background0 = new Image(texture);
+		background0.setHeight(Gdx.graphics.getHeight());
+		background0.setWidth(Gdx.graphics.getWidth());
 		texture = new Texture(Gdx.files.internal("start_back_1.png"));
 		background1 = new Image(texture);
+		background1.setHeight(Gdx.graphics.getHeight());
+		background1.setWidth(Gdx.graphics.getWidth());
 		texture = new Texture(Gdx.files.internal("start_back_2.png"));
 		background2 = new Image(texture);
+		background2.setHeight(Gdx.graphics.getHeight());
+		background2.setWidth(Gdx.graphics.getWidth());
 		texture = new Texture(Gdx.files.internal("start_back_3.png"));
 		background3 = new Image(texture);
+		background3.setHeight(Gdx.graphics.getHeight());
+		background3.setWidth(Gdx.graphics.getWidth());
 		texture = new Texture(Gdx.files.internal("start_back_4.png"));
 		background4 = new Image(texture);
+		background4.setHeight(Gdx.graphics.getHeight());
+		background4.setWidth(Gdx.graphics.getWidth());
 		texture = new Texture(Gdx.files.internal("manual_1.png"));
 		manual1 = new Image(texture);
+		manual1.setHeight(Gdx.graphics.getHeight());
+		manual1.setWidth(Gdx.graphics.getWidth());
 		texture = new Texture(Gdx.files.internal("manual_2.png"));
 		manual2 = new Image(texture);
+		manual2.setHeight(Gdx.graphics.getHeight());
+		manual2.setWidth(Gdx.graphics.getWidth());
 
 		background0.setColor(1, 1, 1, 0);
 		background1.setColor(1, 1, 1, 0);
@@ -126,7 +147,7 @@ public class GameMenu extends GameScreen {
 				if (click == 2) {
 					click2time = alpha;
 				}
-				if(click == 3){
+				if (click == 3) {
 					isDone = true;
 				}
 			}
@@ -176,22 +197,22 @@ public class GameMenu extends GameScreen {
 			}
 		}
 
-		if (click==1) {
-			if(alpha-click1time < 1){
-				manual1.setColor(1, 1, 1, alpha-click1time);
+		if (click == 1) {
+			if (alpha - click1time < 1) {
+				manual1.setColor(1, 1, 1, alpha - click1time);
 				enableClick = false;
-			}else{
+			} else {
 				enableClick = true;
 			}
-			
+
 		}
 
-		if (click==2) {
-			if(alpha-click2time < 1){
+		if (click == 2) {
+			if (alpha - click2time < 1) {
 				enableClick = false;
-				manual1.setColor(1, 1, 1, 1-(alpha-click2time));
-				manual2.setColor(1, 1, 1, alpha-click2time);
-			}else{
+				manual1.setColor(1, 1, 1, 1 - (alpha - click2time));
+				manual2.setColor(1, 1, 1, alpha - click2time);
+			} else {
 				manual1.setColor(1, 1, 1, 0);
 				manual2.setColor(1, 1, 1, 1);
 				enableClick = true;
@@ -219,27 +240,29 @@ public class GameMenu extends GameScreen {
 		spriteBatch.setColor(Color.WHITE);
 		// spriteBatch.enableBlending();
 
-		if (alpha >= 5) {  // background pic is OK
+		if (alpha >= 5) { // background pic is OK
 			if (alpha < 6) { // then show the title
 				font1.setColor(0.6f, 0.6f, 1, alpha - 5);
 				font2.setColor(1, 1, 1, alpha - 5);
-			} else if (alpha <= 7){
+			} else if (alpha <= 7) {
 				font1.setColor(0.6f, 0.6f, 1, 1);
 				font2.setColor(1, 1, 1, 1);
-				
+
 				enableClick = true;
 			}
-			if (click==1) {
-				if(alpha-click1time < 0.8){
+			if (click == 1) {
+				if (alpha - click1time < 0.8) {
 					enableClick = false;
-					font1.setColor(0.6f, 0.6f, 1, 1-(alpha-click1time)*0.8f);
-					font2.setColor(1, 1, 1, 1-(alpha-click1time)*0.8f);
-				}else{
+					font1.setColor(0.6f, 0.6f, 1,
+							1 - (alpha - click1time) * 0.8f);
+					font2.setColor(1, 1, 1, 1 - (alpha - click1time) * 0.8f);
+				} else {
 					enableClick = true;
 				}
 			}
-			font1.draw(spriteBatch, mainTitle, 260, 460); // left bottom is(0,0)
-			font2.draw(spriteBatch, version, 320, 400);
+
+			font1.draw(spriteBatch, mainTitle, 320 * transx, 460 * transy); // left bottom is(0,0)
+			font2.draw(spriteBatch, version, 400 * transx, 400 * transy);
 		}
 
 		spriteBatch.end();
@@ -247,6 +270,7 @@ public class GameMenu extends GameScreen {
 
 	public void dispose() {
 		spriteBatch.dispose();
+		stage.dispose();
 		texture.dispose();
 		font1.dispose();
 		font2.dispose();
