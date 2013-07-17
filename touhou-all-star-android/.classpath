@@ -7,5 +7,8 @@
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="lib" path="/touhou-all-star/libs/gdx.jar" sourcepath="/touhou-all-star/libs/gdx-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/gdx-backend-android.jar" sourcepath="libs/gdx-backend-android-sources.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/gdx-freetype.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/gdx-controllers-android.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/gdx-controllers.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
