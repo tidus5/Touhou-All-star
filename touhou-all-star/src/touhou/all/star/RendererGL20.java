@@ -123,7 +123,7 @@ public class RendererGL20 implements Renderer {
 		renderReimu(gl, simulation.reimu, delta);
 		renderBoss(gl, simulation.boss);
 		renderReimuShots(gl, simulation.reimushots);
-		renderEnemyShots(gl, simulation.enemyshots);
+		renderEnemyShots(gl, simulation.enemyshots1);
 		renderParticle();
 		updateBossLifeBar(gl, simulation.boss);
 

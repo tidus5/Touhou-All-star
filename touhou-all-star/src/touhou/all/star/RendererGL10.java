@@ -89,7 +89,7 @@ public class RendererGL10 implements Renderer {
 		reimuShotTextureRegion = atlas.findRegion("reimushot");
 
 		reimuSprite = new Sprite(atlas.findRegion("reimu"));
-		enemyShotSprite = new Sprite(atlas.findRegion("enemyshot"));
+		enemyShotSprite = new Sprite(new Texture(Gdx.files.internal("rumia_b_1.png")));
 		enemyShotSprite.setPosition(0, 0);
 		judgePointSprite = new Sprite(atlas.findRegion("judgepoint"));
 		pointSprite = new Sprite(atlas.findRegion("point"));
@@ -169,8 +169,8 @@ public class RendererGL10 implements Renderer {
 		renderReimu(gl, simulation.reimu, delta);
 		renderBoss(gl, simulation.boss);
 		renderReimuShots(gl, simulation.reimushots);
-		renderEnemyShots(gl, simulation.enemyshots);
-		renderParticle();
+		renderEnemyShots(gl, simulation.enemyshots1);
+//		renderParticle();
 		updateBossLifeBar(gl, simulation.boss);
 
 		stage.draw();
@@ -218,7 +218,7 @@ public class RendererGL10 implements Renderer {
 
 	void renderReimu(GL10 gl, Reimu reimu, float delta) {
 		if (reimu.dead) {
-			return;
+			//return;
 		}
 		spriteBatch.begin();
 		// spriteBatch.draw(reimuTexture,reimu.position.x,reimu.position.y);

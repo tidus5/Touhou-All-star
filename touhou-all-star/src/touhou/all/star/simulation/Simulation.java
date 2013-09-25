@@ -14,7 +14,8 @@ public class Simulation {
 	public final static float PLAYFIELD_MAX_Y = 656;
 
 	public ArrayList<ReimuShot> reimushots = new ArrayList<ReimuShot>();
-	public ArrayList<EnemyShot> enemyshots = new ArrayList<EnemyShot>();
+	public ArrayList<EnemyShot> enemyshots1 = new ArrayList<EnemyShot>();
+	public ArrayList<EnemyShot> enemyshots2 = new ArrayList<EnemyShot>();
 	public transient SimulationListener listener;
 	public Reimu reimu;
 	public Boss boss;
@@ -23,7 +24,7 @@ public class Simulation {
 	private int bossMovsCount = 1;
 	private float timerRumia = 0;
 	private float timerRumia2 = 0;
-	private float degree = 0;
+	private float degree = 1;
 	private float degreeplus = 0;
 
 	public Simulation() {
@@ -35,7 +36,7 @@ public class Simulation {
 		reimu.position.set(Gdx.graphics.getWidth() / 2, 0);
 
 		boss = new Rumia(new Vector2(0, 0));
-		boss.position.set(400, 600);
+		boss.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight());
 		
 		degree = MathUtils.PI / 7;
 		degreeplus = degree;
@@ -56,35 +57,48 @@ public class Simulation {
 //			enemyShot1();
 //			timerRumia2 = 0;
 //		}
-		if(timerRumia2>-10){
-		if (bossMovsCount > 0) {
-			if (boss.position.x < Gdx.graphics.getWidth() - 128 - 300)
-				boss.position.x += 6;
-			else {
-				if (timerRumia == 0) {
-					 enemyShot1();
-				}
-				timerRumia += delta;
-				if (timerRumia > 1) {
-					bossMovsCount = -1;
-					timerRumia = 0;
-				}
-			}
-		} else {
-			if (boss.position.x > 300)
-				boss.position.x -= 6;
-			else {
-				if (timerRumia == 0) {
-					 enemyShot1();
-				}
-				timerRumia += delta;
-				if (timerRumia > 1) {
-					bossMovsCount = 1;
-					timerRumia = 0;
-				}
+		if(boss.position.y>500){
+			boss.position.y -= 3;
+		}
+		
+		else {
+			timerRumia += delta;
+			if(timerRumia2 > 0.1){
+				rumiaShot1((float)( Math.PI + (timerRumia * 10)% Math.PI ));
+				//System.out.println(timerRumia);
+				timerRumia2 = 0;
 			}
 		}
-		}
+		
+//		if (timerRumia2 > -10) {
+//			if (bossMovsCount > 0) {
+//				if (boss.position.x < Gdx.graphics.getWidth() - 128 - 300)
+//					boss.position.x += 6;
+//				else {
+//					if (timerRumia == 0) {
+//						enemyShot1();
+//					}
+//					timerRumia += delta;
+//					if (timerRumia > 1) {
+//						bossMovsCount = -1;
+//						timerRumia = 0;
+//					}
+//				}
+//			} else {
+//				if (boss.position.x > 300)
+//					boss.position.x -= 6;
+//				else {
+//					if (timerRumia == 0) {
+//						enemyShot1();
+//					}
+//					timerRumia += delta;
+//					if (timerRumia > 1) {
+//						bossMovsCount = 1;
+//						timerRumia = 0;
+//					}
+//				}
+//			}
+//		}
 		
 		boss.center.set(boss.position.x+23, boss.position.y+40);
 	}
@@ -155,8 +169,8 @@ public class Simulation {
 	}
 
 	public void updateEnemyShots(float delta) {
-		for (int i = 0; i < enemyshots.size(); i++) {
-			enemyShot = enemyshots.get(i);
+		for (int i = 0; i < enemyshots1.size(); i++) {
+			enemyShot = enemyshots1.get(i);
 			enemyShot.updateTowards(delta);
 			enemyShot.center.set(enemyShot.position.x + 28,
 					enemyShot.position.y + 30);
@@ -168,7 +182,7 @@ public class Simulation {
 			// shot.position.y);
 			// gl.glPopMatrix();
 			if (enemyShot.hasLeftField) {
-				enemyshots.remove(enemyShot);
+				enemyshots1.remove(enemyShot);
 			}
 			if (enemyShot != null && enemyShot.hasLeftField) {
 				enemyShot = null;
@@ -190,30 +204,44 @@ public class Simulation {
 		}
 	}
 
-	private void enemyShot1() {
+	private void rumiaShot1(float de) {
 		if (!boss.isExploding) {
 			Vector2 center = new Vector2(boss.position);
 			Vector2 toward = new Vector2();
 			int i = 0, j = 0;
-
 			j = (int) (MathUtils.PI * 2 / degree);
+			
+			
+			toward.set(MathUtils.cos(de), MathUtils.sin(de));
+			enemyShot = new EnemyShot(center.add(toward), toward);
+			enemyshots1.add(enemyShot);
+			
+			de += 0.1f;
+			toward.set(MathUtils.cos(de), MathUtils.sin(de));
+			enemyShot = new EnemyShot(center.add(toward.mul(1.2f)), toward);
+			enemyshots1.add(enemyShot);
+			
+			de += 0.1f;
+			toward.set(MathUtils.cos(de), MathUtils.sin(de));
+			enemyShot = new EnemyShot(center.add(toward.mul(1.4f)), toward);
+			enemyshots1.add(enemyShot);
 
-			for (i = 0; i < j; i++) {
-				degreeplus += MathUtils.PI / 7.4;
-				// toward.set(MathUtils.cos(2*MathUtils.PI * i/6),
-				// MathUtils.sin(2*MathUtils.PI * i/6));
-				toward.set(MathUtils.cos(degreeplus), MathUtils.sin(degreeplus));
-				enemyShot = new EnemyShot(center.add(toward), toward);
-				enemyshots.add(enemyShot);
-			}
+//			for (i = 0; i < j; i++) {
+//				degreeplus += MathUtils.PI / 7.4;
+//				//toward.set(MathUtils.cos(2*MathUtils.PI * i/6),
+//				// MathUtils.sin(2*MathUtils.PI * i/6));
+//				toward.set(MathUtils.cos(degreeplus), MathUtils.sin(degreeplus));
+//				enemyShot = new EnemyShot(center.add(toward), toward);
+//				enemyshots1.add(enemyShot);
+//			}
 		}
 	}
 
 	private void updateReimuCollision(float delta) {
 		reimu.isExploding = false;
 		
-		for (int i = 0; i < enemyshots.size(); i++) {
-			enemyShot = enemyshots.get(i);
+		for (int i = 0; i < enemyshots1.size(); i++) {
+			enemyShot = enemyshots1.get(i);
 			if (Math.abs(enemyShot.center.x - reimu.center.x) < enemyShot.length
 					&& Math.abs(enemyShot.center.y - reimu.center.y) < enemyShot.length
 					&& reimu.invincible == false) {
@@ -237,6 +265,7 @@ public class Simulation {
 					reimuShot.position.y +reimuShot.height< boss.position.y||
 					reimuShot.position.y>boss.position.y+boss.height) ){
 				boss.beingShot = true;
+				reimushots.remove(reimuShot);
 				break;
 			}
 		}

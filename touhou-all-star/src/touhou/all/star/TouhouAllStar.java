@@ -70,7 +70,7 @@ public class TouhouAllStar extends Game {
 			currentScreen.dispose();
 
 			if (currentScreen instanceof GameLoading) {
-				setScreen(new GameMenu());
+				setScreen(new GameLoop());
 			}
 			
 			if (currentScreen instanceof GameMenu) {

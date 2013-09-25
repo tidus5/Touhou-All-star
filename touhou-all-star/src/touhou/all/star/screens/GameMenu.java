@@ -44,9 +44,9 @@ public class GameMenu extends GameScreen {
 	private ArrayList<Flower> flowerArray = new ArrayList<Flower>();
 	private ArrayList<Float> flowerDuration = new ArrayList<Float>();
 
-	public static final String FONT_CHARACTERS = "東东方全明星上海爱丽丝幻乐团弹幕过敏者注意伪本游戏根据网的视频制作而来很多面都不足若有侵犯到版权联系我处理请包涵：，。";
-	public static final String mainTitle = "东方弹幕All Star(伪)";
-	public static final String version = "Touhou Barrage All Star (fake)";
+	public static final String FONT_CHARACTERS = "東东方全明星上海爱丽丝幻乐团弹幕过敏者注意伪本游戏根据网的视频制作而来很多面都不足若有侵犯到版权联系我处理请包涵：，。";	
+	public static final String mainTitle = "东方弹幕All Star";
+	public static final String version = "Touhou Barrage All Star";
 	public static final String caution1 = "注：本游戏根据网上东方全明星的视频制作而来，很多方面都有不足。请多多包涵";
 	public static final String caution2 = "若有侵犯到版权，十分抱歉，请联系我处理^_^";
 
