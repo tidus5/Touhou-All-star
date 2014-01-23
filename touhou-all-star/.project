@@ -18,7 +18,7 @@
 		<link>
 			<name>assets</name>
 			<type>2</type>
-			<location>D:/Backup/Documents/workspace/TouhouAllStar/touhou-all-star-android/assets</location>
+			<locationURI>PARENT-1-PROJECT_LOC/touhou-all-star-android/assets</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

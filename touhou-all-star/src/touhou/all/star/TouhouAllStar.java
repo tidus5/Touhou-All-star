@@ -25,7 +25,8 @@ public class TouhouAllStar extends Game {
 
 	@Override
 	public void create() {
-		setScreen(new GameLoading());
+//		setScreen(new GameLoading());
+		setScreen(new GameLoop());
 		
 		Gdx.input.setInputProcessor(new InputAdapter() {
 			@Override

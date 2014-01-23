@@ -38,7 +38,7 @@ public class Simulation {
 		boss = new Rumia(new Vector2(0, 0));
 		boss.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight());
 		
-		degree = MathUtils.PI / 7;
+		degree = MathUtils.PI / 33;
 		degreeplus = degree;
 	}
 
@@ -212,28 +212,28 @@ public class Simulation {
 			j = (int) (MathUtils.PI * 2 / degree);
 			
 			
-			toward.set(MathUtils.cos(de), MathUtils.sin(de));
-			enemyShot = new EnemyShot(center.add(toward), toward);
-			enemyshots1.add(enemyShot);
-			
-			de += 0.1f;
-			toward.set(MathUtils.cos(de), MathUtils.sin(de));
-			enemyShot = new EnemyShot(center.add(toward.mul(1.2f)), toward);
-			enemyshots1.add(enemyShot);
-			
-			de += 0.1f;
-			toward.set(MathUtils.cos(de), MathUtils.sin(de));
-			enemyShot = new EnemyShot(center.add(toward.mul(1.4f)), toward);
-			enemyshots1.add(enemyShot);
+//			toward.set(MathUtils.cos(de), MathUtils.sin(de));
+//			enemyShot = new EnemyShot(center.add(toward), toward);
+//			enemyshots1.add(enemyShot);
+//			
+//			de += 0.1f;
+//			toward.set(MathUtils.cos(de), MathUtils.sin(de));
+//			enemyShot = new EnemyShot(center.add(toward.mul(1.2f)), toward);
+//			enemyshots1.add(enemyShot);
+//			
+//			de += 0.1f;
+//			toward.set(MathUtils.cos(de), MathUtils.sin(de));
+//			enemyShot = new EnemyShot(center.add(toward.mul(1.4f)), toward);
+//			enemyshots1.add(enemyShot);
 
-//			for (i = 0; i < j; i++) {
-//				degreeplus += MathUtils.PI / 7.4;
-//				//toward.set(MathUtils.cos(2*MathUtils.PI * i/6),
-//				// MathUtils.sin(2*MathUtils.PI * i/6));
-//				toward.set(MathUtils.cos(degreeplus), MathUtils.sin(degreeplus));
-//				enemyShot = new EnemyShot(center.add(toward), toward);
-//				enemyshots1.add(enemyShot);
-//			}
+			for (i = 0; i < j; i++) {
+				degreeplus += MathUtils.PI / 7.4;
+				//toward.set(MathUtils.cos(2*MathUtils.PI * i/6),
+				// MathUtils.sin(2*MathUtils.PI * i/6));
+				toward.set(MathUtils.cos(degreeplus), MathUtils.sin(degreeplus));
+				enemyShot = new EnemyShot(center.add(toward), toward);
+				enemyshots1.add(enemyShot);
+			}
 		}
 	}
 
